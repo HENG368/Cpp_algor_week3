@@ -1,15 +1,24 @@
 #ifndef node
 #define node
-class onec_node{
-    public:
-        int val;
-        onec_node* next;
+#include<iostream>
 
+using namespace std;
+struct Snode{
+    int data;
+    Snode* next;
+    Snode(int val){
+        this->data = val;
+        this->next = nullptr;
+    }
 };
-class doub_node{
-    public:
-        int val;
-        doub_node* next;
-        doub_node* prev;
-}
+struct Dnode{
+    int data;
+    Dnode* next;
+    Dnode* pre;
+    Dnode(int val){
+        this->data = val;
+        this->next = nullptr;
+        this->pre  = nullptr;
+    }
+};
 #endif 
