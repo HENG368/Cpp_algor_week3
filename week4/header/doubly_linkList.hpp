@@ -102,6 +102,35 @@ class doubly_linkList{
             cur = cur->next;
         }
         cout << endl;
+    }
+    //  Real-world use cases
+    void add_remove_FrontDll(int ops){
+        head = nullptr;
+        for (int i = 0; i < ops; i++)
+        {
+            if (rand()%2 == 0)
+            {
+                Dnode* new_Node = new Dnode(i);
+                new_Node->next  = head;
+                if(head) head->pre   = new_Node;
+                head = new_Node;
+            }
+            else
+            {
+                if (head)
+                {
+                    
+                    Dnode* temp = head;
+                    head = head->next;
+                    if(head) head->pre = nullptr;
+                    delete temp;
+                }
+                
+            }
+            
+            
+        }
+        
     }   
 };
 

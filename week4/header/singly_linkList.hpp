@@ -4,6 +4,8 @@
 #include<iostream>
 #include <chrono>
 #include <string>
+#include<cstdlib>
+#include<vector>
 using namespace std;
 using clk = chrono::high_resolution_clock;
 
@@ -134,6 +136,73 @@ class Singly_linkList{
     }
     tail->next = head;
     head = newHead;
+    }
+    //  Real-world use cases
+    // Singly linked list add/remove at front
+
+    void add_remove_FrontSll(int ops){
+        head = nullptr;
+        for (int i = 0; i < ops; i++)
+        {
+            if (rand()%2 == 0)
+            {
+               Snode* new_Node = new Snode(i);
+               new_Node->next  = head;
+               head   = new_Node;
+            }
+            else {
+                if (head)
+                {
+                    
+                    Snode* temp = head;
+                    head = head->next;
+                    delete temp;
+                }
+                
+            }
+            
+        }
+        
+    }
+
+    // add front 80% remove 20%
+
+    void add_remove(int ops){
+        head = nullptr;
+        for (int i = 0; i < ops; i++)
+        {
+            if ((rand() % 100) < 80)
+            {
+                Snode* new_Node = new Snode(i);
+                new_Node->next  = head;
+                head = new_Node;
+            }else{
+                if (head)
+                {
+                    Snode* temp = head;
+                    head  =   head->next;
+                    delete temp; 
+                }
+                
+                
+            }
+            
+        }
+        
+    }
+    // dynamic memmory
+    void add_remove_dynamic(int ops){
+        vector<int> stack;
+        stack.reserve(16);
+
+        for (int i = 0; i < ops; ++i) {
+            if ((rand() % 100) < 80) { 
+                stack.push_back(i);
+            } 
+            else { 
+                if (!stack.empty()) stack.pop_back();
+            }
+        }
     }
 
     void sll_observe(Singly_linkList* obj, void (Singly_linkList::*method)(), string msg) {
