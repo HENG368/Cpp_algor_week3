@@ -37,7 +37,7 @@ class circular_singlylinkList{
         new_Node->next = tail->next;
         tail->next     = new_Node;
     }
-    void indertEnd(int val){
+    void indsertEnd(int val){
         Snode* new_Node = new Snode(val);
         if (tail == nullptr)
         {
