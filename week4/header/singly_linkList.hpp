@@ -106,45 +106,45 @@ class Singly_linkList{
     }
     // Rotate right by k 
    void rotate(int k) {
-    if (!head || !head->next) return;
-    int len = 1;
-    Snode* cur = head;
-    while (cur->next) { 
-        cur = cur->next;
-        len++;
-    } 
-    k %= len;
-    if (k == 0) return;
+        if (!head || !head->next) return;
+        int len = 1;
+        Snode* cur = head;
+        while (cur->next) { 
+            cur = cur->next;
+            len++;
+        } 
+        k %= len;
+        if (k == 0) return;
 
-    int split = len - k;
-    Snode* prev = nullptr;
-    cur = head;
-    for (int i = 0; i < split; i++)
-    {
-        prev = cur;
-        cur = cur->next;
-    }
-    prev->next = nullptr;
-    Snode* newHead = cur;
+        int split = len - k;
+        Snode* prev = nullptr;
+        cur = head;
+        for (int i = 0; i < split; i++)
+        {
+            prev = cur;
+            cur = cur->next;
+        }
+        prev->next = nullptr;
+        Snode* newHead = cur;
 
-    Snode* tail = newHead;
-    while (tail->next)
-    {
-        tail = tail->next;
-    }
-    tail->next = head;
-    head = newHead;
+        Snode* tail = newHead;
+            while (tail->next)
+            {
+                tail = tail->next;
+            }
+            tail->next = head;
+            head = newHead;
     }
 
     void sll_observe(Singly_linkList* obj, void (Singly_linkList::*method)(), string msg) {
-    auto t0 = clk::now();
+        auto t0 = clk::now();
 
-    (obj->*method)();  // call the method
+        (obj->*method)();  // call the method
 
-    auto t1 = clk::now();
+        auto t1 = clk::now();
 
-    auto duration = chrono::duration_cast<chrono::nanoseconds>(t1 - t0);
-    cout << msg << ": " << duration.count() << " nanosecond(s)" << endl;
+        auto duration = chrono::duration_cast<chrono::nanoseconds>(t1 - t0);
+        cout << msg << ": " << duration.count() << " nanosecond(s)" << endl;
     }
 
 

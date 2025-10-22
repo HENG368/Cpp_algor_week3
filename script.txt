@@ -1,0 +1,43 @@
+Part A
+# A1
+ - Between (i) and (ii) i think (i) is faster than (ii) because 
+  it did not include the if statement and data acess pattern is more 
+  regular.
+ - about branching methot (i) does not exist and methot (ii) is Frequent
+
+# A2 
+ - Table predicted cast different:
+                        has predecessor | NO predecessor
+    steps per delete=  1-2 pointer update| up to n trversal
+    time complexity =       O(1)          |     O(n)
+    Expect performance =    Fast          |     slower
+ - When we already have the predecessor node, deletion in a CSLL is constant-time (O(1)) because we can directly relink pointers.
+   Without the predecessor, we must traverse the list to find it, making the operation linear-time (O(n)).
+   The performance curve for the no-predecessor case increases linearly with list size, while the with-predecessor case remains constant.
+# A3
+ - CSLL is usually faster for multiple rotation because it support wrapping 
+   around without re-link nullptr.
+ - Both CSLL and SLL rotations have O(n) complexity because they must traverse the list to find the new head.
+   However, CSLL performs slightly faster since its circular structure eliminates the need to break and reconnect the tail.
+   In SLL, extra operations (finding tail, reconnecting to nullptr) add small overhead.
+   For repeated rotations or large k, CSLL provides smoother pointer movement and better cache predictability.
+#A4
+ - Between SLL erase with know predecessor and SLL erase without predecessor
+   we measure on time complexity ,memory per node and typical speed.
+    + time complexity: in sll erase with know predecessor, it use O(1) and sll 
+    erase without predecessor is O(n).
+    + memory per node:  sll erase with know predecessor is use higher memory
+    and sll erase without predecessor is use lower memory.
+    + speed : sll erase with know predecessor is much faster than,
+    sll erase without predecessor.
+#A5
+ -  Using only a head pointer makes push_back operations slow because the list must be traversed to find the last node (O(n)).
+    Adding a tail pointer allows both push_back and pop_front to run in constant time, which greatly improves performance for mixed operations.
+    A doubly linked list adds extra memory overhead but allows efficient operations at both ends (front and back).
+    This shows how adding a tail pointer changes the time–space tradeoff in linked list design.
+#A6
+ - Both Stack and Queue operations can run in O(1) time using linked lists.
+   The main difference is order: Stack is LIFO (works from one end), while Queue is FIFO (requires both head and tail).
+   Stack operations are slightly faster because only one pointer is updated each time, while Queue updates two pointers (head and tail).
+   In practice, both perform efficiently for push/pop patterns but serve different logical purposes.
+
