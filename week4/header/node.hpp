@@ -20,5 +20,6 @@ struct Dnode{
         this->next = nullptr;
         this->pre  = nullptr;
     }
+    
 };
 #endif 

@@ -65,6 +65,7 @@ class doubly_linkList{
             }
             delete cur;
         }
+        
 };
 
 #endif

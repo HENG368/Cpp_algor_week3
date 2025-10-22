@@ -66,6 +66,7 @@ class circular_singlylinkList{
         tail->next = head->next;
         delete head;
     }
+    
 };
 
 #endif
