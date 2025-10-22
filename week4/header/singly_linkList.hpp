@@ -2,6 +2,10 @@
 #define sll_h
 #include"node.hpp"
 #include<iostream>
+#include <chrono>
+#include <string>
+using namespace std;
+using clk = chrono::high_resolution_clock;
 
 
 class Singly_linkList{
@@ -105,6 +109,17 @@ class Singly_linkList{
     Snode* newHead = cur->next;
     tail->next = nullptr;
     head = newHead;
+    }
+
+    void sll_observe(Singly_linkList* obj, void (Singly_linkList::*method)(), string msg) {
+    auto t0 = clk::now();
+
+    (obj->*method)();  // call the method
+
+    auto t1 = clk::now();
+
+    auto duration = chrono::duration_cast<chrono::nanoseconds>(t1 - t0);
+    cout << msg << ": " << duration.count() << " nanosecond(s)" << endl;
     }
 
 };
