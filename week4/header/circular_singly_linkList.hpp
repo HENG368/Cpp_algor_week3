@@ -9,21 +9,19 @@ class circular_singlylinkList{
        
         Snode* tail;
     public:
-        circular_singlylinkList();
+        circular_singlylinkList(){
+            tail = nullptr;
+        }
     void addvalue(int count){
         if (count <=0)
         {
            return;
         }
-        
-        tail = new Snode(0);
-        Snode* cur  = tail;
-        for (int i = 0; i < count; i++)
+        for (int i = 1; i <= count; i++)
         {
-            cur->next = new Snode(i);
+            indsertEnd(i);
         }
-        cur->next = tail;
-        tail = cur;
+        
     }
 
     void  insertFront(int val){
@@ -66,7 +64,19 @@ class circular_singlylinkList{
         tail->next = head->next;
         delete head;
     }
-    
+    void display() {
+        if (tail == nullptr) {
+            cout << "List is empty!\n";
+            return;
+        }
+
+        Snode* temp = tail->next; // start from head
+        do {
+            cout << temp->data << " ";
+            temp = temp->next;
+        } while (temp != tail->next);
+        cout << endl;
+    }
 };
 
 #endif

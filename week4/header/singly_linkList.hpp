@@ -17,26 +17,30 @@ class Singly_linkList{
             tail = nullptr;
         };
     // add value to sll 
-    Snode* addValue_sll(int n){
-        if (n <= 0) return nullptr;
-        head = new Snode(0);
-        Snode* cur  = head;
-
-        for (int i = 1; i < n; i++)
+    void addValue_sll(int n){
+        if (n <= 0) return ;
+        for (int i = 1; i <= n; i++)
         {
-            cur->next = new Snode(i);
-            cur  = cur->next;
+            pushback(i);
         }
-        return head;
+        
     }
     // Traversal with restart at head (for A1)
-    void traver(Snode* head , int n){
-        Snode* cur = head;
-        for (int i = 0; i < n; i++)
+    void traver(){
+        if (head == nullptr)
         {
-            cout << cur->data << " " ;
+            cout << " Node empty! ";
+            return;
+        }
+
+        Snode* cur = head;
+        
+        while (cur != nullptr)
+        {
+            cout << cur->data << " ";
             cur = cur->next;
         }
+        cout <<endl;
         
     }
     void pushfront(int val){
@@ -46,22 +50,31 @@ class Singly_linkList{
     }
     void pushback(int val){
         Snode* new_Node = new Snode(val);
-        tail->next  = new_Node;
-        tail = new_Node;
-    }
-
-    Snode* popHead(){
         if (head == nullptr)
         {
-            return nullptr;
+            head = new_Node;
+            return;
+        }
+        Snode* cur = head;
+        while (cur->next != nullptr)
+        {
+            cur = cur->next;
+        }
+        cur->next = new_Node;
+    }
+
+    void popHead(){
+        if (head == nullptr)
+        {
+            return;
         }
         Snode* cur = head;
         head = head->next;
         delete cur ;
-        return head;
     }
     // Delete node when predecessor known (O(1))
     void deleteWithpre(Snode*pre){
+        if (pre == nullptr || pre->next == nullptr)   return;
         Snode* Node = pre->next;
         pre->next = Node->next;
         delete Node;
@@ -84,30 +97,42 @@ class Singly_linkList{
         {
             pre = pre->next;
         }
-        pre->next = Node->next;
-        if (Node == tail)
+        if (pre && pre->next == Node)
         {
-            tail = pre;
+            pre->next = Node->next;
+            delete Node;
         }
         
-        delete Node;
     }
     // Rotate right by k 
    void rotate(int k) {
     if (!head || !head->next) return;
     int len = 1;
     Snode* cur = head;
-    while (cur->next) { cur = cur->next; len++; } 
+    while (cur->next) { 
+        cur = cur->next;
+        len++;
+    } 
     k %= len;
     if (k == 0) return;
 
     int split = len - k;
+    Snode* prev = nullptr;
     cur = head;
-    for (int i = 1; i < split; ++i) cur = cur->next;
+    for (int i = 0; i < split; i++)
+    {
+        prev = cur;
+        cur = cur->next;
+    }
+    prev->next = nullptr;
+    Snode* newHead = cur;
 
-    tail = cur;       
-    Snode* newHead = cur->next;
-    tail->next = nullptr;
+    Snode* tail = newHead;
+    while (tail->next)
+    {
+        tail = tail->next;
+    }
+    tail->next = head;
     head = newHead;
     }
 
@@ -122,7 +147,7 @@ class Singly_linkList{
     cout << msg << ": " << duration.count() << " nanosecond(s)" << endl;
     }
 
-    
+
 };
 
 #endif

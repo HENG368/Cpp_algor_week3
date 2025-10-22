@@ -1,5 +1,5 @@
-#ifndef doubly_linkList
-#define doubly_linkList
+#ifndef Doubly_linkList
+#define Doubly_linkList
 #include <iostream>
 #include"node.hpp"
 
@@ -8,28 +8,52 @@ class doubly_linkList{
         Dnode* head;
         Dnode* pre;
     public:
-        Dnode* addvalueDll(int n){
+
+        doubly_linkList() {
+            head = nullptr;
+            pre  = nullptr;
+        }
+
+        void addvalueDll(int n){
             if (n <=0)
             {
                 return;
             }
-            
-            head  = new Dnode(0);
-            Dnode* cur = head;
-            for (int i = 1; i < n; i++)
+            for (int i = 1; i <= n; i++)
             {
-                Dnode* new_Node = new Dnode(i);
-                cur->next = new_Node;
-                new_Node->pre = cur;
-                cur = new_Node;
+                insertEnd(i);
             }
-            return head;
+            
         }
-        
+        void insertEnd(int val){
+            Dnode* new_Node = new Dnode(val);
+            if (head == nullptr)
+            {
+                head = pre = new_Node;
+                return;
+            }
+
+            pre->next = new_Node;
+            new_Node->pre = pre;
+            pre = new_Node;
+            
+        }
+        void insertFront(int val){
+            Dnode* new_Node = new Dnode(val);
+            if (head == nullptr)
+            {
+                head = pre = new_Node;
+                return;
+            }
+            
+            new_Node->next = head;
+            head->pre      = new_Node;
+            head = new_Node;
+        }
         void deleteDllNode(int pos){
             if (head == nullptr)
             {
-                cout <<"Not empty!";
+                cout <<"Node empty!";
                 return;
             }
             Dnode* cur = head;
@@ -40,7 +64,7 @@ class doubly_linkList{
                delete cur;
                return;
             }
-            for (int i = 1; i < pos; i++)
+            for (int i = 1; i < pos && cur != nullptr; i++)
             {
                 cur = cur->next;
             }
@@ -50,12 +74,12 @@ class doubly_linkList{
                 return;
             }
             
-            if (cur->next != nullptr)
+            if (cur->pre != nullptr)
             {    
                 cur->pre->next = cur->next;
             }
             
-            if (cur->pre != nullptr)
+            if (cur->next != nullptr)
             {
                 cur->next->pre = cur->pre;
             }
@@ -65,7 +89,20 @@ class doubly_linkList{
             }
             delete cur;
         }
-        
+    void displayForword(){
+        if (head == nullptr)
+        {
+            cout << "Node empty!";
+            return;
+        }
+        Dnode* cur =  head;
+        while (cur != nullptr)
+        {
+            cout << cur->data << " ";
+            cur = cur->next;
+        }
+        cout << endl;
+    }   
 };
 
 #endif
